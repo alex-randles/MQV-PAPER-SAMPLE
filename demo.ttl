@@ -49,6 +49,9 @@ ex:validDatatypeDefinition a dqv:Metric ;
           dqv:inDimension ex:dataConsistency;
           mqv:hasRefinement ex:refinement1 .
 
+ex:violation1 a mqv:MappingViolation;
+          mqv:isDescribedBy ex:validDatatypeDefinition .
+
 ex:refinement1 a mqv:MappingRefinement ;
           mqv:hasRefinementQuery <file://home/validationReport.ttl> .
 
