@@ -1,12 +1,12 @@
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-DELETE{?om rr:datatype ?datatype}
-INSERT{?om rr:datatype xsd:string }
+DELETE{ ?om rr:datatype ?datatype }
+INSERT{ ?om rr:datatype xsd:string }
 WHERE
 {
-  ?sub rr:predicateObjectMap ?pom.
-  ?pom rr:predicate foaf:name.
-  ?pom rr:objectMap ?om.
-  ?om rr:datatype ?datatype.
+  ?sub rr:predicateObjectMap ?pom .
+  ?pom rr:predicate foaf:name .
+  ?pom rr:objectMap ?om .
+  ?om rr:datatype ?datatype .
 }
