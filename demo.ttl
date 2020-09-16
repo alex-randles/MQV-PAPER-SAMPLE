@@ -26,10 +26,10 @@ ex:quaityRequirement1 a mqv:QualityRefinement;
 ex:mappingEngineer a mqv:Agent .
 
 ex:mapDoc a mqv:MappingDocument;
-            mqv:hasQualityMeasurement ex:qualityMeasurement1 .
+           mqv:hasQualityMeasurement ex:qualityMeasurement1 .
 
 ex:qualityMeasurement1 a mqv:QualityMeasurement;
-			mqv:isMeasurementOf ex:validDatatypeDefinition .
+            mqv:isMeasurementOf ex:validDatatypeDefinition .
 
 ex:intrinsicCategory a dqv:Category ;
            skos:prefLabel "Intrinsic category"@en;
