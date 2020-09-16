@@ -28,9 +28,12 @@ ex:mappingEngineer a mqv:Agent .
 ex:mapDoc a mqv:MappingDocument;
             mqv:hasQualityMeasurement ex:qualityMeasurement1 .
 
+ex:qualityMeasurement1 a mqv:QualityMeasurement;
+			mqv:isMeasurementOf ex:validDatatypeDefinition .
+
 ex:intrinsicCategory a dqv:Category ;
            skos:prefLabel "Intrinsic category"@en;
-           skos:definition "Intrinsic category groups dimensions related to the corrrectness, consistency and conciseness."@en .
+           skos:definition "Intrinsic category groups dimensions related to the correctness, consistency and conciseness."@en .
 
 ex:dataConsistency  a dqv:Dimension ;
            dqv:inCategory ex:intrinsicCategory;
