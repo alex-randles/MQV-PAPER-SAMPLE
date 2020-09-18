@@ -28,8 +28,8 @@ ex:mappingEngineer a mqv:Agent .
 ex:mapDoc a mqv:MappingDocument;
            mqv:hasQualityMeasurement ex:qualityMeasurement1 .
 
-ex:qualityMeasurement1 a mqv:QualityMeasurement;
-            mqv:isMeasurementOf ex:validDatatypeDefinition .
+ex:qualityMeasurement1 a dqv:QualityMeasurement;
+           mqv:isMeasurementOf ex:validDatatypeDefinition .
 
 ex:intrinsicCategory a dqv:Category ;
            skos:prefLabel "Intrinsic category"@en;
