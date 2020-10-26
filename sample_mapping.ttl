@@ -15,15 +15,14 @@
 		rr:template "http://www.example.com/people/data/{ID}";
 		rr:termType rr:IRI;
 		rr:class foaf:Person;
-
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate foaf:name ;
+		rr:predicate foaf:age ;
 		rr:objectMap  [
-      			rr:column "NAME";
+      			rr:column "AGE";
       			rr:termType rr:Literal;
-            rr:datatype xsd:integer;
+                rr:datatype xsd:date;
 		    ];
    ];
 
