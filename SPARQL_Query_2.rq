@@ -1,0 +1,9 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+DELETE{ ?om rr:column ?column }
+INSERT{ ?om rr:column 'DOB' }
+WHERE { ?sub rr:predicateObjectMap ?pom .
+        ?pom rr:predicate foaf:age .
+        ?pom rr:objectMap ?om .
+        ?om rr:column ?column . } 
+
