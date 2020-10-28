@@ -44,7 +44,7 @@ ex:validDatatypeDefinition a dqv:Metric ;
           skos:definition "Validates the correct datatype has been assigned."@en ;
           dqv:expectedDataType xsd:boolean ;
           dqv:inDimension ex:dataConsistency;
-          mqv:hasRefinement ex:refinement1 .
+          mqv:hasRefinement ex:refinement1, ex:refinement2 .
 
 
 ex:validationReport a mqv:MappingValidationReport;
@@ -55,16 +55,24 @@ ex:violation1 a mqv:MappingViolation;
 
 ex:refinement1 a mqv:MappingRefinement ;
           mqv:hasRefinementQuery """
+                PREFIX rr: <http://www.w3.org/ns/r2rml#> 
+				PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+				PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+				DELETE{ ?om rr:datatype ?datatype } 
+				INSERT{ ?om rr:datatype xsd:integer } 
+				WHERE { ?sub rr:predicateObjectMap ?pom . 
+						 ?pom rr:predicate foaf:age . 
+						 ?pom rr:objectMap ?om . 
+						 ?om rr:datatype ?datatype . }"""; .
+						 
+ex:refinement2 a mqv:MappingRefinement ;
+          mqv:hasRefinementQuery """
                 PREFIX rr: <http://www.w3.org/ns/r2rml#>
-                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                DELETE{ ?om rr:datatype ?datatype }
-                INSERT{ ?om rr:datatype xsd:string }
-                WHERE
-                {
-                  ?sub rr:predicateObjectMap ?pom .
-                  ?pom rr:predicate foaf:name .
-                  ?pom rr:objectMap ?om .
-                  ?om rr:datatype ?datatype .
-                }"""; .
+				PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+				DELETE{ ?om rr:column ?column }
+				INSERT{ ?om rr:column 'DOB' }
+				WHERE { ?sub rr:predicateObjectMap ?pom .
+						?pom rr:predicate foaf:age .
+						?pom rr:objectMap ?om .
+						?om rr:column ?column . } """; .
 
