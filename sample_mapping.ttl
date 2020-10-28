@@ -18,12 +18,12 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate foaf:age ;
-		rr:objectMap  [
-      			rr:column "AGE";
-      			rr:termType rr:Literal;
-                rr:datatype xsd:date;
-		    ];
+      rr:predicate foaf:age ;
+	  rr:objectMap  [
+      		rr:column "AGE";
+      		rr:termType rr:Literal;
+            rr:datatype xsd:date;
+		];
    ];
 
    rr:predicateObjectMap [

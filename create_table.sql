@@ -1,4 +1,4 @@
-CREATE TABLE People (
+CREATE TABLE PEOPLE (
     ID int,
     NAME varchar(255),
     AGE int,
@@ -8,7 +8,7 @@ CREATE TABLE People (
 
 
 
-INSERT INTO People
+INSERT INTO PEOPLE
   ( ID, NAME, AGE, DOB, EMAIL )
 VALUES
   (0, "Alex", 22, "25/11/97", "alex@gmail.com"), 
