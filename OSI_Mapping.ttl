@@ -1,0 +1,78 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-synta-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix ex: <http://example.com/ns#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix daq: <http://purl.org/eis/vocab/daq#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix mqv: <http://ontology.example.org/mqv#> .
+@prefix dcterms: <http://purl.org/dc/terms/>.
+
+
+ex:qualityAssessement a mqv:MappingAssessment;
+            mqv:performedBy ex:mappingEngineer;
+            mqv:performedOn ex:mapDoc;
+            mqv:executes ex:validDatatypeDefinition;
+            mqv:hasQualityRequirement ex:quaityRequirement1;
+            mqv:hasValidationReport ex:validationReport .
+
+ex:quaityRequirement1 a mqv:QualityRefinement;
+            mqv:hasQualityMeasurement ex:validDatatypeDefinition .
+
+ex:mappingEngineer a mqv:Agent .
+
+ex:mapDoc a mqv:MappingDocument;
+           mqv:hasQualityMeasurement ex:qualityMeasurement1 .
+
+ex:qualityMeasurement1 a dqv:QualityMeasurement;
+           mqv:isMeasurementOf ex:validDatatypeDefinition .
+
+ex:intrinsicCategory a dqv:Category ;
+           skos:prefLabel "Intrinsic category"@en;
+           skos:definition "Intrinsic category groups dimensions related to the correctness, consistency and conciseness."@en .
+
+ex:dataConsistency  a dqv:Dimension ;
+           dqv:inCategory ex:intrinsicCategory;
+           skos:prefLabel "Data Consistency"@en;
+           skos:definition "Data Consistency refers to the extent to which a dataset will be generated with no consistency conflicting information."@en .
+
+ex:validDatatypeDefinition a dqv:Metric ;
+          skos:definition "Validates the correct datatype has been assigned."@en ;
+          dqv:expectedDataType xsd:boolean ;
+          dqv:inDimension ex:dataConsistency;
+          mqv:hasRefinement ex:refinement1, ex:refinement2 .
+
+
+ex:validationReport a mqv:MappingValidationReport;
+          mqv:hasViolation ex:violation1 .
+
+ex:violation1 a mqv:MappingViolation;
+          mqv:isDescribedBy ex:validDatatypeDefinition .
+
+ex:refinement1 a mqv:MappingRefinement ;
+          mqv:hasRefinementQuery """
+                PREFIX rr: <http://www.w3.org/ns/r2rml#> 
+				PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+				PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+				DELETE{ ?om rr:datatype ?datatype } 
+				INSERT{ ?om rr:datatype xsd:integer } 
+				WHERE { ?sub rr:predicateObjectMap ?pom . 
+						 ?pom rr:predicate foaf:age . 
+						 ?pom rr:objectMap ?om . 
+						 ?om rr:datatype ?datatype . }"""; .
+						 
+ex:refinement2 a mqv:MappingRefinement ;
+          mqv:hasRefinementQuery """
+                PREFIX rr: <http://www.w3.org/ns/r2rml#>
+				PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+				DELETE{ ?om rr:column ?column }
+				INSERT{ ?om rr:column 'DOB' }
+				WHERE { ?sub rr:predicateObjectMap ?pom .
+						?pom rr:predicate foaf:age .
+						?pom rr:objectMap ?om .
+						?om rr:column ?column . } """; .
+
